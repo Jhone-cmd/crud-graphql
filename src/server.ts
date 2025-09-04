@@ -1,5 +1,6 @@
 import { app } from "./app"
+import { env } from "./env/schema"
 
-app.listen({ port: 4000 }, () => {
+app.listen({ port: env.PORT }, () => {
   console.log("Server is running 🚀")
 })
