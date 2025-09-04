@@ -1,0 +1,6 @@
+# Dependencies do Node
+node_modules
+
+# Folders
+
+.vscode
