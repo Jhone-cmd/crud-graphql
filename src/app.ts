@@ -14,7 +14,13 @@ async function init() {
 
   const resolvers = {
     Query: {
-      hello: () => "hello world, graphql",
+      user: () => ({
+        id: 1,
+        name: "John Doe",
+        email: "johndoe@email.com",
+        password: "jsaiodasd45a6s46dasdas",
+        notes: [{ title: "first note", description: "description note" }],
+      }),
     },
   }
 
