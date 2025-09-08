@@ -5,6 +5,7 @@ import fastifyApollo, {
 import cors from "@fastify/cors"
 import fastify from "fastify"
 import { connectDB } from "./config/connect-database"
+import { resolverQuery } from "./graphql/resolvers/resolver-query"
 import { typeDefs } from "./graphql/types/type-defs"
 
 export const app = fastify()
@@ -12,21 +13,9 @@ export const app = fastify()
 async function init() {
   connectDB()
 
-  const resolvers = {
-    Query: {
-      user: () => ({
-        id: 1,
-        name: "John Doe",
-        email: "johndoe@email.com",
-        password: "jsaiodasd45a6s46dasdas",
-        notes: [{ title: "first note", description: "description note" }],
-      }),
-    },
-  }
-
   const apollo = new ApolloServer({
     typeDefs,
-    resolvers,
+    resolvers: [resolverQuery],
     plugins: [fastifyApolloDrainPlugin(app)],
   })
 
