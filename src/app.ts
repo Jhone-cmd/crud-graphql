@@ -16,6 +16,8 @@ type UserDB = Record<string, PropsUser>
 
 export const memoryDB: UserDB = {}
 
+console.log(memoryDB)
+
 async function init() {
   connectDB()
 

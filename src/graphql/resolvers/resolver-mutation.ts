@@ -4,10 +4,23 @@ import { createUser } from "../../services/create-user"
 
 export const resolverMutation = {
   Mutation: {
-    createUserMutation: (_: any, input: PropsUser) => {
+    createUserMutation: (
+      _: any,
+      { name, email, password, notes }: PropsUser
+    ) => {
       const id = crypto.randomUUID()
-      memoryDB[id] = input
-      return createUser(id, input)
+      memoryDB[id] = {
+        name,
+        email,
+        password,
+        notes,
+      }
+      return createUser(id, {
+        name,
+        email,
+        password,
+        notes,
+      })
     },
   },
 }
