@@ -9,7 +9,9 @@
   "linter": {
     "rules": {
       "suspicious": {
-        "noConsole": "off"
+        "noConsole": "off",
+        "noEvolvingTypes": "off",
+        "noExplicitAny": "off"
       },
       "style": {
         "noMagicNumbers": "off"

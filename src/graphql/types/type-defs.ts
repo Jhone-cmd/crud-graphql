@@ -28,4 +28,8 @@ export const typeDefs = `
         title: String
         description: String
     }
+
+    type Mutation {
+        createUserMutation(input: UserInput): Users
+    }
 `

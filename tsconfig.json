@@ -21,8 +21,5 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node16",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
   }
 }

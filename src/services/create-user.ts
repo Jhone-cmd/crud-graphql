@@ -1,4 +1,4 @@
-import type { PropsUser } from "@/interfaces/interface-user"
+import type { PropsUser } from "../interfaces/interface-user"
 
 export function createUser(
   id: string,
