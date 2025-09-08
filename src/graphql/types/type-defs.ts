@@ -15,4 +15,17 @@ export const typeDefs = `
     type Query {
         user: Users
     }
+
+    input UserInput {
+        id: ID
+        name: String
+        email: String
+        password: String
+        notes: [NoteInput]
+    }
+
+    input NoteInput {
+        title: String
+        description: String
+    }
 `
