@@ -13,6 +13,9 @@
       },
       "style": {
         "noMagicNumbers": "off"
+      },
+      "nursery": {
+        "useConsistentTypeDefinitions": "off"
       }
     }
   }
