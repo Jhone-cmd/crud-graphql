@@ -11,18 +11,15 @@ export const resolverMutation = {
       { input }: { input: PropsUser } // Acesso correto ao 'input'
     ) => {
       const id = crypto.randomUUID()
-      memoryDB[id] = {
+      const newUser = {
+        id,
         name: input.name,
         email: input.email,
         password: input.password,
         notes: input.notes,
       }
-      return createUser(id, {
-        name: input.name,
-        email: input.email,
-        password: input.password,
-        notes: input.notes,
-      })
+      memoryDB[id] = newUser
+      return createUser(id, newUser)
     },
 
     updateUserMutation: (

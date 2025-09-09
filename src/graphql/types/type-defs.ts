@@ -13,7 +13,7 @@ export const typeDefs = `
     }
 
     type Query {
-        user: Users
+        users: [Users]
         getUser(id: ID): Users
     }
 
