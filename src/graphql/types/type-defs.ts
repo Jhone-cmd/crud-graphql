@@ -32,5 +32,6 @@ export const typeDefs = `
 
     type Mutation {
         createUserMutation(input: UserInput): Users
+        updateUserMutation(id: ID, input: UserInput): Users
     }
 `
