@@ -14,6 +14,7 @@ export const typeDefs = `
 
     type Query {
         user: Users
+        getUser(id: ID): Users
     }
 
     input UserInput {

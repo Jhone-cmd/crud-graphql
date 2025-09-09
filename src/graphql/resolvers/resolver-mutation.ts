@@ -6,7 +6,7 @@ import { createUser } from "../../services/create-user"
 export const resolverMutation = {
   Mutation: {
     createUserMutation: async (
-      _: any,
+      _: unknown,
       { input }: { input: PropsUser } // Acesso correto ao 'input'
     ) => {
       const id = crypto.randomUUID()

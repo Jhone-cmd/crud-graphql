@@ -1,3 +1,6 @@
+import { memoryDB } from "../../app"
+import { createUser } from "../../services/create-user"
+
 export const resolverQuery = {
   Query: {
     user: () => ({
@@ -7,5 +10,9 @@ export const resolverQuery = {
       password: "123456789",
       notes: [{ title: "first note", description: "description note" }],
     }),
+
+    getUser: (_: unknown, { id }: { id: string }) => {
+      return createUser(id, memoryDB[id])
+    },
   },
 }
