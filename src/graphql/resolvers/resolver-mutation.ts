@@ -1,6 +1,7 @@
 import { memoryDB } from "../../app"
 import type { PropsUser } from "../../interfaces/interface-user"
 import { createUser } from "../../services/create-user"
+import { deleteUser } from "../../services/delete-user"
 import { updateUser } from "../../services/update-user"
 
 export const resolverMutation = {
@@ -41,6 +42,21 @@ export const resolverMutation = {
         ...user,
         ...input,
       })
+    },
+
+    deleteUserMutation: (
+      _: unknown,
+      { id }: { id: string } // Acesso correto ao 'input'
+    ) => {
+      if (!memoryDB[id]) {
+        throw new Error("User not found.")
+      }
+
+      const userId = id
+
+      delete memoryDB[id]
+
+      return deleteUser(userId)
     },
   },
 }
