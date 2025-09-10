@@ -1,10 +1,11 @@
-import { memoryDB } from "../../app"
+// import { memoryDB } from "../../app"
 import { Users } from "../../models/user-model"
 
 export const resolverQuery = {
   Query: {
-    users: () => {
-      return Object.values(memoryDB)
+    getAllUsers: async () => {
+      const users = await Users.find()
+      return users
     },
 
     getUser: async (_: unknown, { id }: { id: string }) => {

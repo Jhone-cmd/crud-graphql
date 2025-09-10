@@ -13,8 +13,8 @@ export const typeDefs = `
     }
 
     type Query {
-        users: [Users]
         getUser(id: ID): Users
+        getAllUsers: [Users]
     }
 
     input UserInput {
