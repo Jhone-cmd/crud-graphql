@@ -1,25 +1,28 @@
+import { hash } from "bcryptjs"
 import { memoryDB } from "../../app"
 import type { PropsUser } from "../../interfaces/interface-user"
-import { createUser } from "../../services/create-user"
+import { Users } from "../../models/user-model"
 import { deleteUser } from "../../services/delete-user"
 import { updateUser } from "../../services/update-user"
 
 export const resolverMutation = {
   Mutation: {
-    createUserMutation: (
+    createUserMutation: async (
       _: unknown,
       { input }: { input: PropsUser } // Acesso correto ao 'input'
     ) => {
-      const id = crypto.randomUUID()
-      const newUser = {
-        id,
+      const newUser = new Users({
         name: input.name,
         email: input.email,
-        password: input.password,
+        password: await hash(input.password, 8),
         notes: input.notes,
-      }
-      memoryDB[id] = newUser
-      return createUser(id, newUser)
+      })
+
+      newUser.id = newUser._id
+
+      await newUser.save()
+
+      return newUser
     },
 
     updateUserMutation: (
