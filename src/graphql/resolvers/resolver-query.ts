@@ -1,5 +1,5 @@
 import { memoryDB } from "../../app"
-import { createUser } from "../../services/create-user"
+import { Users } from "../../models/user-model"
 
 export const resolverQuery = {
   Query: {
@@ -7,8 +7,9 @@ export const resolverQuery = {
       return Object.values(memoryDB)
     },
 
-    getUser: (_: unknown, { id }: { id: string }) => {
-      return createUser(id, memoryDB[id])
+    getUser: async (_: unknown, { id }: { id: string }) => {
+      const user = await Users.findById(id)
+      return user
     },
   },
 }
