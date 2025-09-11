@@ -14,7 +14,8 @@
         "noExplicitAny": "off"
       },
       "style": {
-        "noMagicNumbers": "off"
+        "noMagicNumbers": "off",
+        "noEnum": "off"
       },
       "nursery": {
         "useConsistentTypeDefinitions": "off"

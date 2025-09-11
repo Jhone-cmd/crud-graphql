@@ -13,6 +13,7 @@ export const resolverMutation = {
         email: input.email,
         password: await hash(input.password, 8),
         notes: input.notes,
+        status: input.status,
       })
 
       newUser.id = newUser._id
@@ -47,6 +48,28 @@ export const resolverMutation = {
 
       return updatedUser
     },
+
+    // updateAllUsersMutation: async (
+    //   _: unknown,
+    //   { input }: { input: PropsUser } // Acesso correto ao 'input'
+    // ) => {
+    //   const users = await Users.find()
+
+    //   const updateFields = { ...input }
+
+    //   if (input.password) {
+    //     const hashedPassword = await hash(input.password, 8)
+    //     updateFields.password = hashedPassword
+    //   }
+
+    //   const updatedUser = await Users.findByIdAndUpdate(
+    //     { _id: id },
+    //     { $set: updateFields },
+    //     { new: true, runValidators: true }
+    //   )
+
+    //   return updatedUser
+    // },
 
     deleteUserMutation: async (
       _: unknown,

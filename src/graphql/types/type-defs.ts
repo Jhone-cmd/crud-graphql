@@ -5,11 +5,17 @@ export const typeDefs = `
         email: String
         password: String
         notes: [Note]
+        status: Status
     }
 
     type Note {
         title: String
         description: String
+    }
+    
+    enum Status {
+        active
+        inactive
     }
 
     type Query {
@@ -23,6 +29,7 @@ export const typeDefs = `
         email: String
         password: String
         notes: [NoteInput]
+        status: Status
     }
 
     input NoteInput {
