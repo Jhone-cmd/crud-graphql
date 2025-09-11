@@ -49,27 +49,25 @@ export const resolverMutation = {
       return updatedUser
     },
 
-    // updateAllUsersMutation: async (
-    //   _: unknown,
-    //   { input }: { input: PropsUser } // Acesso correto ao 'input'
-    // ) => {
-    //   const users = await Users.find()
+    updateAllUsersMutation: async (
+      _: unknown,
+      { input }: { input: PropsUser } // Acesso correto ao 'input'
+    ) => {
+      const updateFields = { ...input }
 
-    //   const updateFields = { ...input }
+      if (input.password) {
+        const hashedPassword = await hash(input.password, 8)
+        updateFields.password = hashedPassword
+      }
 
-    //   if (input.password) {
-    //     const hashedPassword = await hash(input.password, 8)
-    //     updateFields.password = hashedPassword
-    //   }
+      const userIds = await Users.find().distinct("_id")
 
-    //   const updatedUser = await Users.findByIdAndUpdate(
-    //     { _id: id },
-    //     { $set: updateFields },
-    //     { new: true, runValidators: true }
-    //   )
+      await Users.updateMany({}, { $set: updateFields })
 
-    //   return updatedUser
-    // },
+      const updatedUsers = await Users.find({ _id: { $in: userIds } })
+
+      return updatedUsers
+    },
 
     deleteUserMutation: async (
       _: unknown,

@@ -40,6 +40,7 @@ export const typeDefs = `
     type Mutation {
         createUserMutation(input: UserInput): Users
         updateUserMutation(id: ID, input: UserInput): Users
+        updateAllUsersMutation(input: UserInput): [Users]
         deleteUserMutation(id: ID): Users
         deleteAllUsersMutation: [Users]
     }
