@@ -2,7 +2,6 @@ import { hash } from "bcryptjs"
 import { memoryDB } from "../../app"
 import type { PropsUser } from "../../interfaces/interface-user"
 import { Users } from "../../models/user-model"
-import { deleteUser } from "../../services/delete-user"
 import { updateUser } from "../../services/update-user"
 
 export const resolverMutation = {
@@ -44,19 +43,19 @@ export const resolverMutation = {
       })
     },
 
-    deleteUserMutation: (
+    deleteUserMutation: async (
       _: unknown,
       { id }: { id: string } // Acesso correto ao 'input'
     ) => {
-      if (!memoryDB[id]) {
+      const user = await Users.findById(id)
+
+      if (!user) {
         throw new Error("User not found.")
       }
 
-      const userId = id
+      await Users.deleteOne({ _id: id })
 
-      delete memoryDB[id]
-
-      return deleteUser(userId)
+      return user
     },
   },
 }
