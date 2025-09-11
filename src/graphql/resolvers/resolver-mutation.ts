@@ -57,5 +57,13 @@ export const resolverMutation = {
 
       return user
     },
+
+    deleteAllUsersMutation: async (_: unknown) => {
+      const users = await Users.find()
+
+      await Users.deleteMany()
+
+      return users
+    },
   },
 }

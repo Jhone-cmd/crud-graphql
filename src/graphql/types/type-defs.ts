@@ -34,5 +34,6 @@ export const typeDefs = `
         createUserMutation(input: UserInput): Users
         updateUserMutation(id: ID, input: UserInput): Users
         deleteUserMutation(id: ID): Users
+        deleteAllUsersMutation: [Users]
     }
 `
