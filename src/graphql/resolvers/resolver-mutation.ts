@@ -1,8 +1,6 @@
 import { hash } from "bcryptjs"
-import { memoryDB } from "../../app"
 import type { PropsUser } from "../../interfaces/interface-user"
 import { Users } from "../../models/user-model"
-import { updateUser } from "../../services/update-user"
 
 export const resolverMutation = {
   Mutation: {
@@ -24,23 +22,30 @@ export const resolverMutation = {
       return newUser
     },
 
-    updateUserMutation: (
+    updateUserMutation: async (
       _: unknown,
       { id, input }: { id: string; input: PropsUser } // Acesso correto ao 'input'
     ) => {
-      const user = memoryDB[id]
+      const user = await Users.findById(id)
 
       if (!user) {
         throw new Error("User not found.")
       }
-      memoryDB[id] = {
-        ...user,
-        ...input,
+
+      const updateFields = { ...input }
+
+      if (input.password) {
+        const hashedPassword = await hash(input.password, 8)
+        updateFields.password = hashedPassword
       }
-      return updateUser(id, {
-        ...user,
-        ...input,
-      })
+
+      const updatedUser = await Users.findByIdAndUpdate(
+        { _id: id },
+        { $set: updateFields },
+        { new: true, runValidators: true }
+      )
+
+      return updatedUser
     },
 
     deleteUserMutation: async (
